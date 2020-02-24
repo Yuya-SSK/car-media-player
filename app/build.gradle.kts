@@ -1,8 +1,4 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-android-extensions")
-    id("kotlin-kapt")
     id("androidx.navigation.safeargs")
 }
 
@@ -20,7 +16,7 @@ android {
          // Project.ktに拡張関数を記述している.
 //        getByName("release") {
         release {
-            isMinifyEnabled  = false
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -29,7 +25,7 @@ android {
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility =  JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -67,14 +63,10 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.2.1")
     implementation("androidx.navigation:navigation-ui-ktx:2.2.1")
 
-    // Room
-    kapt("androidx.room:room-compiler:2.2.4")
-    implementation("androidx.room:room-runtime:2.2.4")
-    implementation("androidx.room:room-ktx:2.2.4")
-
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.1")
 
-    testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
+
+    testImplementation("junit:junit:4.12")
 }
