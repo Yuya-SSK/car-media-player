@@ -3,25 +3,25 @@ plugins {
 }
 
 android {
-    compileSdkVersion(Versions.COMPILE_SDK)
+    common()
     defaultConfig {
         applicationId = "com.ysp.camep"
-        minSdkVersion(Versions.MIN_SDK)
-        targetSdkVersion(Versions.TARGET_SDK)
-        versionCode = Versions.CODE
-        versionName = Versions.NAME
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
+//    compileSdkVersion(Versions.COMPILE_SDK)
+//    defaultConfig {
+//        applicationId = "com.ysp.camep"
+//        minSdkVersion(Versions.MIN_SDK)
+//        targetSdkVersion(Versions.TARGET_SDK)
+//        versionCode = Versions.CODE
+//        versionName = Versions.NAME
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//    }
     buildTypes {
-         // Project.ktに拡張関数を記述している.
-//        getByName("release") {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-    }
-    buildFeatures {
-        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -29,6 +29,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    buildFeatures {
+        dataBinding = true
     }
 }
 
