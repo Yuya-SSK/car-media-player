@@ -1,4 +1,6 @@
 plugins {
+    id("com.android.application")
+    id("kotlin-android")
     id("androidx.navigation.safeargs")
 }
 
@@ -8,15 +10,6 @@ android {
         applicationId = "com.ysp.camep"
     }
 
-//    compileSdkVersion(Versions.COMPILE_SDK)
-//    defaultConfig {
-//        applicationId = "com.ysp.camep"
-//        minSdkVersion(Versions.MIN_SDK)
-//        targetSdkVersion(Versions.TARGET_SDK)
-//        versionCode = Versions.CODE
-//        versionName = Versions.NAME
-//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-//    }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false

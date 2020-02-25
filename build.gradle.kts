@@ -17,13 +17,4 @@ allprojects {
     }
 }
 
-subprojects {
-    if (project.name == "app") {
-        apply(plugin = "com.android.application")
-    } else {
-        apply(plugin = "com.android.library")
-    }
-    apply(plugin = "kotlin-android")
-}
-
 task<Delete>("clean") { delete(rootProject.buildDir) }

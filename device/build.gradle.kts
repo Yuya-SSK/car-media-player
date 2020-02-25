@@ -1,3 +1,8 @@
+plugins {
+    `common-android-library`
+}
+
+
 android {
     common()
     defaultConfig {

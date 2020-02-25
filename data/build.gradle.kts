@@ -1,4 +1,5 @@
 plugins {
+    `common-android-library`
     id("kotlin-kapt")
 }
 
