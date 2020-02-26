@@ -19,6 +19,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
 
+    // Core
+    implementation("androidx.core:core-ktx:1.2.0")
+
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test:rules:1.2.0")
     androidTestImplementation("org.assertj:assertj-core:3.2.0")
@@ -31,6 +34,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf(
             "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-Xuse-experimental=kotlinx.coroutines.InternalCoroutinesApi",
             "-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi",
             "-Xuse-experimental=kotlinx.coroutines.FlowPreview")
     }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Camep</string>
-    <string name="next">Next</string>
+
     <string name="previous">Previous</string>
     <string name="hello_home_second">Hello HomeSecondFragment. Arg: %1$s</string>
     <string name="hello_dashboard_second">Hello DashboardSecondFragment. Arg: %1$s</string>
@@ -8,6 +8,21 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="content_description">Content Description.</string>
+    <string name="title_media_select">Media Select</string>
+    <string name="notification_group_app">アプリ内通知</string>
+    <string name="notification_monitoring_supply_power">電源供給状態監視</string>
+    <string name="notification_monitoring_supply_power_title">電源供給待ち</string>
+    <string name="notification_monitoring_supply_power_text">電源供給開始直後、動画をレジューム再生</string>
+    <string name="notification_monitoring_supply_power_button_text">終了</string>
+    <string name="video">Video</string>
+    <string name="audio">Audio</string>
+    <string name="skip">スキップ</string>
+    <string name="next">次へ</string>
+    <string name="rationale_dialog_title">ストレージアクセス権の承諾について</string>
+    <string name="rationale_dialog_message">このアプリでメディアファイルを再生するためには、ストレージへのアクセス権が必要です。次の画面でこのアプリへのアクセス権付与を承諾して下さい。</string>
+    <string name="title_activity_splash">SplashActivity</string>
 
     <string name="home_second">Home Second</string>
 </resources>
