@@ -23,7 +23,6 @@ object Injection {
         return getInstance(PlaylistRoomDatabase.getInstance(context).playlistDao())
     }
 
-    @JvmStatic
     fun provideVideoContentRepository(context: Context): VideoContentRepository {
         return getInstance(VideoContentDaoImpl(context))
     }

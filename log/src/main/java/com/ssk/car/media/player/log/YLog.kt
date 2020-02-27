@@ -4,8 +4,8 @@ import android.util.Log
 
 object YLog {
     private const val tag = "CarMediaPlayer"
-    private const val LOG_PREFIX_METHOD_IN = "[in ]"
-    private const val LOG_PREFIX_METHOD_OUT = "[out]"
+    private const val LOG_PREFIX_METHOD_IN = "in"
+    private const val LOG_PREFIX_METHOD_OUT = "out"
     private val LOG_ENABLED = BuildConfig.DEBUG
     private val LOG_LEVEL = LogLevel.Verbose
     private const val PRINT_THREAD_NAME = true
@@ -13,13 +13,22 @@ object YLog {
     fun i(message: String?) = printLog(LogLevel.Info, message)
     fun w(message: String?) = printLog(LogLevel.Warn, message)
     fun e(message: String?) = printLog(LogLevel.Error, message)
-    fun methodIn(message: String? = "") = printLog(LogLevel.Verbose, message, LOG_PREFIX_METHOD_IN)
-    fun methodOut(message: String? = "") = printLog(LogLevel.Verbose, message, LOG_PREFIX_METHOD_OUT)
-    private fun printLog(logLevel: LogLevel, message: String?, prefix: String = "") {
+    fun methodIn(message: String? = "") = printLog(LogLevel.Verbose, "${getLogLine()} $LOG_PREFIX_METHOD_IN $message")
+    fun methodOut(message: String? = "") = printLog(LogLevel.Verbose, "${getLogLine()} $LOG_PREFIX_METHOD_OUT $message")
+    private fun printLog(logLevel: LogLevel, message: String?) {
         if (!LOG_ENABLED) return
         if (LOG_LEVEL.ordinal > logLevel.ordinal) return
         val threadName = if (PRINT_THREAD_NAME) "[${Thread.currentThread().name}]" else ""
-        Log.println(logLevel.value, tag, "$threadName $prefix $message")
+        Log.println(logLevel.value, tag, "$threadName $message")
+    }
+
+    private fun getLogLine(): String {
+        val element = Thread.currentThread().stackTrace[5]
+        val fullClassName = element.className
+        val simpleClassName = fullClassName.substring(fullClassName.lastIndexOf('.') + 1)
+        val methodName = element.methodName
+        val lineNumber = element.lineNumber
+        return "$simpleClassName#$methodName:$lineNumber"
     }
 
     private enum class LogLevel(val value: Int) {

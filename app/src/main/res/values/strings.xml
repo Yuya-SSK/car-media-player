@@ -15,7 +15,7 @@
     <string name="notification_monitoring_supply_power">電源供給状態監視</string>
     <string name="notification_monitoring_supply_power_title">電源供給待ち</string>
     <string name="notification_monitoring_supply_power_text">電源供給開始直後、動画をレジューム再生</string>
-    <string name="notification_monitoring_supply_power_button_text">終了</string>
+    <string name="action_end">終了</string>
     <string name="video">Video</string>
     <string name="audio">Audio</string>
     <string name="skip">スキップ</string>

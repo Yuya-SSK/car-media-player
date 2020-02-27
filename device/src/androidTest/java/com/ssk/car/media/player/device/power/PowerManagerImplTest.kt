@@ -13,8 +13,25 @@ class PowerManagerImplTest {
 
     @Before
     fun setUp() {
-        powerManager = PowerManagerImpl.getInstance(
-                AndroidPowerManager(InstrumentationRegistry.getInstrumentation().targetContext))
+        powerManager = PowerManagerImpl.getInstance(AndroidPowerManager(
+            InstrumentationRegistry.getInstrumentation().targetContext))
+    }
+
+    @Test
+    fun useCase() {
+        YLog.methodIn()
+        runBlocking {
+            YLog.d("useCase runBlocking in")
+            val job = launch(Dispatchers.Default) {
+                powerManager.connectionStateFlow().collect {
+                    YLog.d("受信者1 $it")
+                }
+            }
+            delay(1000 * 5)
+            job.cancelAndJoin()
+            YLog.d("useCase runBlocking out")
+        }
+        YLog.methodOut()
     }
 
     @Test
