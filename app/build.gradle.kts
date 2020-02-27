@@ -24,6 +24,10 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.2.1")
     implementation("androidx.navigation:navigation-ui-ktx:2.2.1")
 
+    // Runtime Permission Utility
+    implementation("org.permissionsdispatcher:permissionsdispatcher:4.6.0")
+    kapt("org.permissionsdispatcher:permissionsdispatcher-processor:4.6.0")
+
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.1")
 }
 

@@ -30,7 +30,7 @@ class MyService : LifecycleService() {
     override fun onCreate() {
         YLog.methodIn()
         super.onCreate()
-        lifecycleScope.launchWhenCreated{
+        lifecycleScope.launchWhenCreated {
             powerManager.connectionStateFlow().collect {
                 YLog.d(it.name)
             }

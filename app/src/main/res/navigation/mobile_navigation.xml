@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_video">
+
+    <fragment
+        android:id="@+id/navigation_video"
+        android:name="com.ysp.camep.ui.videocontents.VideoContentsFragment"
+        android:label="@string/title_video"
+        tools:layout="@layout/video_contents_fragment" />
 
     <fragment
         android:id="@+id/navigation_home"
@@ -15,6 +21,7 @@
             android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
             app:destination="@id/navigation_home_second" />
     </fragment>
+
     <fragment
         android:id="@+id/navigation_home_second"
         android:name="com.ysp.camep.ui.home.HomeSecondFragment"
@@ -40,4 +47,5 @@
         android:name="com.ysp.camep.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/notifications_fragment" />
+
 </navigation>

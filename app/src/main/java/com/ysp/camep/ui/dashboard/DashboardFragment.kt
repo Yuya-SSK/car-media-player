@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.ysp.camep.R
 import com.ysp.camep.databinding.DashboardFragmentBinding
-import com.ysp.camep.databinding.MainActivityBinding
 
 class DashboardFragment : Fragment() {
 
