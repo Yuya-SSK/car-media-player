@@ -19,11 +19,11 @@ abstract class PlaybackRoomDatabase : RoomDatabase() {
         @Volatile
         private var instance: PlaybackRoomDatabase? = null
         @JvmStatic
-        fun getInstance(context: Context) = instance ?: synchronized(this) {
+        fun getInstance(context: Context, name: String = DB_NAME) = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(
-                    context.applicationContext,
-                    PlaybackRoomDatabase::class.java,
-                    DB_NAME
+                context.applicationContext,
+                PlaybackRoomDatabase::class.java,
+                name
             ).fallbackToDestructiveMigration().build().also { instance = it }
         }
     }

@@ -28,6 +28,10 @@ dependencies {
     implementation("org.permissionsdispatcher:permissionsdispatcher:4.6.0")
     kapt("org.permissionsdispatcher:permissionsdispatcher-processor:4.6.0")
 
+    // Exo Player
+    implementation("com.google.android.exoplayer:exoplayer-core:2.9.6")
+    implementation("com.google.android.exoplayer:exoplayer-ui:2.9.6")
+
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.1")
 }
 

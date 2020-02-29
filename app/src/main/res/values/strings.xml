@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Camep</string>
 
+    <string name="playlist_database_name">playlist.db</string>
+
     <string name="previous">Previous</string>
     <string name="hello_home_second">Hello HomeSecondFragment. Arg: %1$s</string>
     <string name="hello_dashboard_second">Hello DashboardSecondFragment. Arg: %1$s</string>
@@ -26,4 +28,6 @@
     <string name="title_activity_splash">SplashActivity</string>
 
     <string name="home_second">Home Second</string>
+    <string name="video_contents">ビデオコンテンツ</string>
+    <string name="video_playlist">ビデオプレイリスト</string>
 </resources>

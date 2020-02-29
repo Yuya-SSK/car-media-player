@@ -20,7 +20,4 @@ class VideoContentsViewModel(application: Application) : AndroidViewModel(applic
             videoContentsLiveData.setValue(videoContentRepository.videoContentList())
         }
     }
-
-    fun onSelected(videoContent: VideoContent) {
-    }
 }

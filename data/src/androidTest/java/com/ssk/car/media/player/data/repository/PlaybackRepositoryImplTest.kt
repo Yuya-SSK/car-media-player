@@ -38,8 +38,8 @@ class PlaybackRepositoryImplTest {
     @Test
     fun insertPlayback() = runBlocking {
         repository.insertPlayback(Playback())
-        assertThat(repository.playbackWithContents()).hasSize(1)
-        assertThat(repository.playbackWithContents()[0].contents).isEmpty()
+        assertThat(repository.playbackWithContentsList()).hasSize(1)
+        assertThat(repository.playbackWithContentsList()[0].contents).isEmpty()
         return@runBlocking
     }
 
@@ -48,9 +48,27 @@ class PlaybackRepositoryImplTest {
         repository.insertPlayback(Playback())
 
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-        assertThat(repository.playbackWithContents()[0].contents).hasSize(1)
+        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(1)
+        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY), PlaybackContent(uri = URI_DUMMY))
+        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(3)
+
+        repository.insertPlaybackContents(URI_DUMMY)
+        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(4)
+        repository.insertPlaybackContents(URI_DUMMY, URI_DUMMY)
+        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(6)
+
+        return@runBlocking
+    }
+
+    @Test
+    fun getPlaybackContents() = runBlocking {
+        assertThat(repository.playbackWithContents()).isNull()
+        repository.insertPlayback(Playback())
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-        assertThat(repository.playbackWithContents()[0].contents).hasSize(2)
+        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(1)
+        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
+        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(2)
+        assertThat(repository.playbackWithContents()).isNotNull()
         return@runBlocking
     }
 
@@ -60,12 +78,12 @@ class PlaybackRepositoryImplTest {
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
 
-        val playback = repository.playbackWithContents()[0].playback
+        val playback = repository.playbackWithContentsList()[0].playback
         playback.windowIndex = 1
         playback.position = 55555
         repository.updatePlayback(playback)
-        assertThat(repository.playbackWithContents()[0].playback.windowIndex).isEqualTo(1)
-        assertThat(repository.playbackWithContents()[0].playback.position).isEqualTo(55555)
+        assertThat(repository.playbackWithContentsList()[0].playback.windowIndex).isEqualTo(1)
+        assertThat(repository.playbackWithContentsList()[0].playback.position).isEqualTo(55555)
         return@runBlocking
     }
 
@@ -75,10 +93,10 @@ class PlaybackRepositoryImplTest {
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
 
-        val playbackContent = repository.playbackWithContents()[0].contents[0]
+        val playbackContent = repository.playbackWithContentsList()[0].contents[0]
         playbackContent.isPlayed = true
         repository.updatePlaybackContents(playbackContent)
-        assertThat(repository.playbackWithContents()[0].contents[0].isPlayed).isTrue()
+        assertThat(repository.playbackWithContentsList()[0].contents[0].isPlayed).isTrue()
         return@runBlocking
     }
 
@@ -88,7 +106,7 @@ class PlaybackRepositoryImplTest {
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
 
-        repository.deletePlayback(repository.playbackWithContents()[0].playback)
-        assertThat(repository.playbackWithContents()).isEmpty()
+        repository.deletePlayback(repository.playbackWithContentsList()[0].playback)
+        assertThat(repository.playbackWithContentsList()).isEmpty()
     }
 }

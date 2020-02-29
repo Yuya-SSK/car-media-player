@@ -7,45 +7,51 @@
 
     <fragment
         android:id="@+id/navigation_video"
-        android:name="com.ysp.camep.ui.videocontents.VideoContentsFragment"
+        android:name="com.ysp.camep.ui.video.VideoFragment"
         android:label="@string/title_video"
-        tools:layout="@layout/video_contents_fragment" />
+        tools:layout="@layout/video_fragment" />
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.ysp.camep.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/home_fragment">
-
+        android:id="@+id/navigation_video_contents"
+        android:name="com.ysp.camep.ui.videocontents.VideoContentsFragment"
+        android:label="VideoContentsFragment"
+        tools:layout="@layout/video_contents_fragment" >
         <action
-            android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
-            app:destination="@id/navigation_home_second" />
+            android:id="@+id/action_VideoContents_to_VideoPlayer"
+            app:destination="@id/navigation_video_player" />
     </fragment>
 
+    <activity
+        android:id="@+id/navigation_video_player"
+        android:name="com.ysp.camep.ui.videoplayer.VideoPlayerActivity"
+        android:label="VideoPlayerActivity">
+        <argument
+            android:name="uris"
+            app:argType="android.net.Uri[]" />
+    </activity>
     <fragment
-        android:id="@+id/navigation_home_second"
-        android:name="com.ysp.camep.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
+        android:id="@+id/homeFragment"
+        android:name="com.ysp.camep.ui.home.HomeFragment"
+        android:label="HomeFragment" >
         <action
-            android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
-            app:destination="@id/navigation_home" />
-
+            android:id="@+id/action_Home_to_HomeSecond"
+            app:destination="@id/homeSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeSecondFragment"
+        android:name="com.ysp.camep.ui.home.HomeSecondFragment"
+        android:label="HomeSecondFragment" >
         <argument
             android:name="myArg"
             app:argType="string" />
     </fragment>
-
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/dashboardFragment"
         android:name="com.ysp.camep.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/dashboard_fragment" />
-
+        android:label="DashboardFragment" />
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/notificationsFragment"
         android:name="com.ysp.camep.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/notifications_fragment" />
+        android:label="NotificationsFragment" />
 
 </navigation>

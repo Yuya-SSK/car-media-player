@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.ysp.camep.databinding.HomeFragmentBinding
+import androidx.navigation.fragment.NavHostFragment.findNavController as findNavController1
 
 class HomeFragment : Fragment() {
 
@@ -31,10 +33,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonHome.setOnClickListener {
-            val action = HomeFragmentDirections
-                    .actionHomeFragmentToHomeSecondFragment("From HomeFragment")
-            NavHostFragment.findNavController(this@HomeFragment)
-                    .navigate(action)
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeToHomeSecond("From HomeFragment"))
         }
     }
 }
