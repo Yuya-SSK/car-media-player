@@ -17,13 +17,12 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController = findNavController(R.id.main_nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_video)
-//            R.id.navigation_video,
-//            R.id.navigation_home,
-//            R.id.navigation_dashboard,
-//            R.id.navigation_notifications)
+            R.id.video_fragment,
+            R.id.home_fragment,
+            R.id.dashboard_fragment,
+            R.id.notifications_fragment)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)

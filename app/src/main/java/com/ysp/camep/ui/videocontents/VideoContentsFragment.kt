@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssk.car.media.player.data.entity.VideoContent
 import com.ssk.car.media.player.log.YLog
 import com.ysp.camep.databinding.VideoContentsFragmentBinding
+import com.ysp.camep.ui.video.VideoFragmentDirections
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 
@@ -55,7 +56,7 @@ class VideoContentsFragment : Fragment(), VideoContentsAdapter.ItemClickListener
     override fun onItemClick(videoContent: VideoContent) {
         YLog.methodIn(videoContent.toString())
         findNavController().navigate(
-            VideoContentsFragmentDirections.actionVideoContentsToVideoPlayer(
+            VideoFragmentDirections.actionVideoToVideoPlayer(
                 listOf(videoContent.uri).toTypedArray()))
     }
 }

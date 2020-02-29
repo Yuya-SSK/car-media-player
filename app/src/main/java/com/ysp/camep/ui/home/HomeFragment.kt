@@ -1,5 +1,6 @@
 package com.ysp.camep.ui.home
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,7 @@ class HomeFragment : Fragment() {
 
         binding.buttonHome.setOnClickListener {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeToHomeSecond("From HomeFragment"))
+                HomeFragmentDirections.actionHomeToHomeSecond("From HomeFragment."))
         }
     }
 }

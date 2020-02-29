@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/video_nav_graph"
+    app:startDestination="@+id/video_contents_fragment">
+
+    <fragment
+        android:id="@+id/video_contents_fragment"
+        android:name="com.ysp.camep.ui.videocontents.VideoContentsFragment"
+        android:label="VideoContentsFragment"
+        tools:layout="@layout/video_contents_fragment">
+        <action
+            android:id="@+id/action_video_contents_to_video_player"
+            app:destination="@id/video_player_activity" />
+    </fragment>
+    <fragment
+        android:id="@+id/video_playlist_fragment"
+        android:name="com.ysp.camep.ui.videoplaylist.VideoPlaylistFragment"
+        android:label="VideoPlaylistFragment">
+        <action
+            android:id="@+id/action_video_playlist_to_video_player"
+            app:destination="@id/video_player_activity" />
+    </fragment>
+    <activity
+        android:id="@+id/video_player_activity"
+        android:name="com.ysp.camep.ui.videoplayer.VideoPlayerActivity"
+        android:label="VideoPlayerActivity">
+        <argument
+            android:name="uris"
+            app:argType="android.net.Uri[]" />
+    </activity>
+
+</navigation>

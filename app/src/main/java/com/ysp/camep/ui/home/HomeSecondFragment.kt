@@ -30,9 +30,5 @@ class HomeSecondFragment : Fragment() {
 
         view.findViewById<TextView>(R.id.textview_home_second).text =
                 getString(R.string.hello_home_second, args.myArg)
-
-        view.findViewById<Button>(R.id.button_home_second).setOnClickListener {
-            findNavController().navigate(R.id.action_Home_to_HomeSecond)
-        }
     }
 }
