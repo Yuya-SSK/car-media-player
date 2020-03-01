@@ -71,7 +71,7 @@ class VideoPlayerViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private fun play(mediaSource: MediaSource, windowIndex: Int = 0, position: Long = 0) {
-        YLog.methodIn("mediaSource=$mediaSource windowIndex=$windowIndex position=$position")
+        YLog.methodIn("windowIndex=$windowIndex position=$position")
         player.prepare(mediaSource)
         player.seekTo(windowIndex, position)
         player.playWhenReady = true
@@ -108,42 +108,42 @@ class VideoPlayerViewModel(application: Application) : AndroidViewModel(applicat
             trackGroups: TrackGroupArray,
             trackSelections: TrackSelectionArray
         ) {
-            YLog.methodIn("${player.currentPeriodIndex} ${player.currentWindowIndex}")
+            YLog.methodIn("onTracksChanged : ${player.currentPeriodIndex} ${player.currentWindowIndex}")
         }
 
         override fun onLoadingChanged(isLoading: Boolean) {
-            YLog.methodIn("$isLoading")
+            YLog.methodIn("onLoadingChanged : $isLoading")
         }
 
         override fun onPlayerStateChanged(
             playWhenReady: Boolean,
             playbackState: Int
         ) {
-            YLog.methodIn("$playWhenReady $playbackState")
+            YLog.methodIn("onPlayerStateChanged : $playWhenReady $playbackState")
         }
 
         override fun onRepeatModeChanged(repeatMode: Int) {
-            YLog.methodIn("$repeatMode")
+            YLog.methodIn("onRepeatModeChanged : $repeatMode")
         }
 
         override fun onShuffleModeEnabledChanged(shuffleModeEnabled: Boolean) {
-            YLog.methodIn("$shuffleModeEnabled")
+            YLog.methodIn("onRepeatModeChanged : $shuffleModeEnabled")
         }
 
         override fun onPlayerError(error: ExoPlaybackException) {
-            YLog.methodIn(error.message)
+            YLog.methodIn("onRepeatModeChanged : ${error.message}")
         }
 
         override fun onPositionDiscontinuity(reason: Int) {
-            YLog.methodIn("$reason")
+            YLog.methodIn("onPositionDiscontinuity : $reason")
         }
 
         override fun onPlaybackParametersChanged(playbackParameters: PlaybackParameters) {
-            YLog.methodIn(playbackParameters.toString())
+            YLog.methodIn("onPlaybackParametersChanged : $playbackParameters")
         }
 
         override fun onSeekProcessed() {
-            YLog.methodIn("currentPosition : ${player.currentPosition}")
+            YLog.methodIn("onSeekProcessed : currentPosition : ${player.currentPosition}")
         }
     }
 }
