@@ -8,7 +8,7 @@ import com.ysp.camep.Injection
 import kotlinx.coroutines.launch
 
 class VideoContentsViewModel(application: Application) : AndroidViewModel(application) {
-    private val videoContentRepository: VideoContentRepository = Injection.provideVideoContentRepository(application)
+    private val videoContentRepository = Injection.provideVideoContentRepository(application)
     private val videoContentsLiveData = MutableLiveData<List<VideoContent>>()
 
     fun videoContents(): LiveData<List<VideoContent>> {

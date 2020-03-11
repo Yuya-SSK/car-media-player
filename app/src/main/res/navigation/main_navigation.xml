@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_video_to_video_player"
             app:destination="@id/video_player_activity" />
+        <action
+            android:id="@+id/action_video_fragment_to_videoPlaylistContentsFragment"
+            app:destination="@id/videoPlaylistContentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/home_fragment"
@@ -46,5 +49,13 @@
             android:name="uris"
             app:argType="android.net.Uri[]" />
     </activity>
+    <fragment
+        android:id="@+id/videoPlaylistContentsFragment"
+        android:name="com.ysp.camep.ui.videoplaylistcontents.VideoPlaylistContentsFragment"
+        android:label="VideoPlaylistContentsFragment" >
+        <argument
+            android:name="playlist_id"
+            app:argType="long" />
+    </fragment>
 
 </navigation>

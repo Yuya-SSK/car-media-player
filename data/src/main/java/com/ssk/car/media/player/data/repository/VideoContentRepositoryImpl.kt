@@ -1,5 +1,6 @@
 package com.ssk.car.media.player.data.repository
 
+import android.net.Uri
 import com.ssk.car.media.player.data.dao.VideoContentDao
 import com.ssk.car.media.player.data.entity.VideoContent
 
@@ -15,7 +16,7 @@ class VideoContentRepositoryImpl(
         }
     }
 
-    override suspend fun videoContentList(): List<VideoContent> {
-        return videoContentDao.videoContents()
-    }
+    override suspend fun videoContentList(): List<VideoContent> =videoContentDao.videoContents()
+
+    override suspend fun videoContent(uri: Uri): VideoContent? = videoContentDao.videoContent(uri)
 }

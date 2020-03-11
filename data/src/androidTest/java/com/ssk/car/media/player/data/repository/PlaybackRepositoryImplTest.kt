@@ -5,7 +5,6 @@ import android.net.Uri
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.ssk.car.media.player.data.db.PlaybackRoomDatabase
-import com.ssk.car.media.player.data.entity.Playback
 import com.ssk.car.media.player.data.entity.PlaybackContent
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
@@ -36,77 +35,92 @@ class PlaybackRepositoryImplTest {
     }
 
     @Test
-    fun insertPlayback() = runBlocking {
-        repository.insertPlayback(Playback())
-        assertThat(repository.playbackWithContentsList()).hasSize(1)
-        assertThat(repository.playbackWithContentsList()[0].contents).isEmpty()
+    fun playbackWithContents() = runBlocking {
+
+        assertThat(repository.playbackWithContents().playback.id).isEqualTo(1L)
+        assertThat(repository.playbackWithContents().playback.windowIndex).isEqualTo(0)
+        assertThat(repository.playbackWithContents().playback.position).isEqualTo(0L)
+        assertThat(repository.playbackWithContents().contents).isEmpty()
+
+        repository.deleteAll()
+
+        assertThat(repository.playbackWithContents().playback.id).isEqualTo(1L)
+        assertThat(repository.playbackWithContents().playback.windowIndex).isEqualTo(0)
+        assertThat(repository.playbackWithContents().playback.position).isEqualTo(0L)
+        assertThat(repository.playbackWithContents().contents).isEmpty()
+
         return@runBlocking
     }
 
     @Test
     fun insertPlaybackContents() = runBlocking {
-        repository.insertPlayback(Playback())
 
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(1)
+        assertThat(repository.playbackWithContents().contents).hasSize(1)
         repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY), PlaybackContent(uri = URI_DUMMY))
-        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(3)
+        assertThat(repository.playbackWithContents().contents).hasSize(3)
 
         repository.insertPlaybackContents(URI_DUMMY)
-        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(4)
+        assertThat(repository.playbackWithContents().contents).hasSize(4)
         repository.insertPlaybackContents(URI_DUMMY, URI_DUMMY)
-        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(6)
+        assertThat(repository.playbackWithContents().contents).hasSize(6)
 
-        return@runBlocking
-    }
+        repository.deleteAll()
 
-    @Test
-    fun getPlaybackContents() = runBlocking {
-        assertThat(repository.playbackWithContents()).isNull()
-        repository.insertPlayback(Playback())
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(1)
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-        assertThat(repository.playbackWithContentsList()[0].contents).hasSize(2)
-        assertThat(repository.playbackWithContents()).isNotNull()
+        repository.insertPlaybackContents(URI_DUMMY)
+        assertThat(repository.playbackWithContents().contents).hasSize(1)
+        repository.insertPlaybackContents(URI_DUMMY, URI_DUMMY)
+        assertThat(repository.playbackWithContents().contents).hasSize(3)
+
         return@runBlocking
     }
 
     @Test
     fun updatePlayback() = runBlocking {
-        repository.insertPlayback(Playback())
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
 
-        val playback = repository.playbackWithContentsList()[0].playback
-        playback.windowIndex = 1
+        val playback = repository.playbackWithContents().playback
+        playback.windowIndex = 11111
         playback.position = 55555
         repository.updatePlayback(playback)
-        assertThat(repository.playbackWithContentsList()[0].playback.windowIndex).isEqualTo(1)
-        assertThat(repository.playbackWithContentsList()[0].playback.position).isEqualTo(55555)
+        assertThat(repository.playbackWithContents().playback.id).isEqualTo(1L)
+        assertThat(repository.playbackWithContents().playback.windowIndex).isEqualTo(11111)
+        assertThat(repository.playbackWithContents().playback.position).isEqualTo(55555)
+        assertThat(repository.playbackWithContents().contents).isEmpty()
+
+        repository.deleteAll()
+
+        assertThat(repository.playbackWithContents().playback.id).isEqualTo(1L)
+        assertThat(repository.playbackWithContents().playback.windowIndex).isEqualTo(0)
+        assertThat(repository.playbackWithContents().playback.position).isEqualTo(0L)
+        assertThat(repository.playbackWithContents().contents).isEmpty()
+
         return@runBlocking
     }
 
     @Test
     fun updatePlaybackContents() = runBlocking {
-        repository.insertPlayback(Playback())
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
+        repository.insertPlaybackContents(URI_DUMMY)
+        repository.insertPlaybackContents(URI_DUMMY)
 
-        val playbackContent = repository.playbackWithContentsList()[0].contents[0]
-        playbackContent.isPlayed = true
-        repository.updatePlaybackContents(playbackContent)
-        assertThat(repository.playbackWithContentsList()[0].contents[0].isPlayed).isTrue()
+        val playbackContent0 = repository.playbackWithContents().contents[0]
+        playbackContent0.isPlayed = true
+        repository.updatePlaybackContents(playbackContent0)
+        assertThat(repository.playbackWithContents().contents[0].isPlayed).isTrue()
+        assertThat(repository.playbackWithContents().contents[1].isPlayed).isFalse()
+
+        val playbackContent1 = repository.playbackWithContents().contents[1]
+        playbackContent1.isPlayed = true
+        repository.updatePlaybackContents(playbackContent1)
+        assertThat(repository.playbackWithContents().contents[0].isPlayed).isTrue()
+        assertThat(repository.playbackWithContents().contents[1].isPlayed).isTrue()
+
+        repository.deleteAll()
+
+        assertThat(repository.playbackWithContents().playback.id).isEqualTo(1L)
+        assertThat(repository.playbackWithContents().playback.windowIndex).isEqualTo(0)
+        assertThat(repository.playbackWithContents().playback.position).isEqualTo(0L)
+        assertThat(repository.playbackWithContents().contents).isEmpty()
+
         return@runBlocking
-    }
-
-    @Test
-    fun delete() = runBlocking {
-        repository.insertPlayback(Playback())
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
-
-        repository.deletePlayback(repository.playbackWithContentsList()[0].playback)
-        assertThat(repository.playbackWithContentsList()).isEmpty()
     }
 }

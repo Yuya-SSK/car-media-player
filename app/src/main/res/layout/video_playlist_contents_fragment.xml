@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.ysp.camep.ui.videoplaylist.VideoPlaylistViewModel" />
+            type="com.ysp.camep.ui.videoplaylistcontents.VideoPlaylistContentsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/video_playlist_recycler"
+            android:id="@+id/video_playlist_contents_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"

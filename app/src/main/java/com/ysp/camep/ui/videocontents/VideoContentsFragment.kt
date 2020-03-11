@@ -29,8 +29,8 @@ class VideoContentsFragment : Fragment(), VideoContentsAdapter.ItemClickListener
         YLog.methodIn()
         binding = VideoContentsFragmentBinding.inflate(inflater, container, false)
         val adapter = VideoContentsAdapter(this)
-        binding.videoRecycler.adapter = adapter
-        binding.videoRecycler.layoutManager = LinearLayoutManager(activity)
+        binding.videoContentsRecycler.adapter = adapter
+        binding.videoContentsRecycler.layoutManager = LinearLayoutManager(activity)
         viewModel.videoContents().observe(viewLifecycleOwner) {
             adapter.setItems(it)
         }
