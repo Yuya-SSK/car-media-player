@@ -7,11 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ssk.car.media.player.data.entity.VideoContent
-import com.ysp.camep.databinding.VideoRecyclerItemBinding
-import com.ysp.camep.ui.videocontents.VideoContentsAdapter.VideoRecyclerViewHolder
+import com.ysp.camep.databinding.VideoContentsItemBinding
+import com.ysp.camep.ui.videocontents.VideoContentsAdapter.VideoContentsItemViewHolder
 
 class VideoContentsAdapter(private val listener: ItemClickListener) :
-    RecyclerView.Adapter<VideoRecyclerViewHolder>() {
+    RecyclerView.Adapter<VideoContentsItemViewHolder>() {
     interface ItemClickListener {
         fun onItemClick(videoContent: VideoContent)
     }
@@ -20,15 +20,15 @@ class VideoContentsAdapter(private val listener: ItemClickListener) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): VideoRecyclerViewHolder {
-        return VideoRecyclerViewHolder(
-            VideoRecyclerItemBinding.inflate(
+    ): VideoContentsItemViewHolder {
+        return VideoContentsItemViewHolder(
+            VideoContentsItemBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false)
         )
     }
 
     override fun onBindViewHolder(
-        holder: VideoRecyclerViewHolder, position: Int) {
+        holder: VideoContentsItemViewHolder, position: Int) {
         holder.backgroundView.setOnClickListener { listener.onItemClick(items[position]) }
         holder.thumbnailView.setImageBitmap(items[position].thumbnail)
         holder.titleView.text = items[position].title
@@ -43,7 +43,7 @@ class VideoContentsAdapter(private val listener: ItemClickListener) :
         notifyDataSetChanged()
     }
 
-    class VideoRecyclerViewHolder(binding: VideoRecyclerItemBinding)
+    class VideoContentsItemViewHolder(binding: VideoContentsItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
         val backgroundView: View = binding.backgroundView
         val thumbnailView: ImageView = binding.thumbnailView
