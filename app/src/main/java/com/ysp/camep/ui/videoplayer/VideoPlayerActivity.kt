@@ -15,7 +15,8 @@ import com.ysp.camep.databinding.VideoPlayerActivityBinding
 class VideoPlayerActivity : AppCompatActivity(R.layout.video_player_activity) {
     private val args: VideoPlayerActivityArgs by navArgs()
     private val binding: VideoPlayerActivityBinding by lazy {
-        VideoPlayerActivityBinding.bind(findViewById<ViewGroup>(android.R.id.content)[0]) }
+        VideoPlayerActivityBinding.bind(findViewById<ViewGroup>(android.R.id.content)[0])
+    }
     private val viewModel: VideoPlayerViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

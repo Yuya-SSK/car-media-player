@@ -10,12 +10,8 @@ import com.ssk.car.media.player.data.entity.VideoContent
 import com.ysp.camep.databinding.VideoPlaylistContentsItemBinding
 import com.ysp.camep.ui.videoplaylistcontents.VideoPlaylistContentsAdapter.VideoPlaylistContentsItemViewHolder
 
-class VideoPlaylistContentsAdapter(private val listener: ItemClickListener) :
+class VideoPlaylistContentsAdapter(private val listener: (videoContent: VideoContent) -> Unit) :
     RecyclerView.Adapter<VideoPlaylistContentsItemViewHolder>() {
-    interface ItemClickListener {
-        fun onItemClick(videoContent: VideoContent)
-    }
-
     private var items: List<VideoContent> = listOf()
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,13 +19,15 @@ class VideoPlaylistContentsAdapter(private val listener: ItemClickListener) :
     ): VideoPlaylistContentsItemViewHolder {
         return VideoPlaylistContentsItemViewHolder(
             VideoPlaylistContentsItemBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false)
+                LayoutInflater.from(parent.context), parent, false
+            )
         )
     }
 
     override fun onBindViewHolder(
-        holder: VideoPlaylistContentsItemViewHolder, position: Int) {
-        holder.backgroundView.setOnClickListener { listener.onItemClick(items[position]) }
+        holder: VideoPlaylistContentsItemViewHolder, position: Int
+    ) {
+        holder.backgroundView.setOnClickListener { listener(items[position]) }
         holder.thumbnailView.setImageBitmap(items[position].thumbnail)
         holder.titleView.text = items[position].title
     }
@@ -43,8 +41,8 @@ class VideoPlaylistContentsAdapter(private val listener: ItemClickListener) :
         notifyDataSetChanged()
     }
 
-    class VideoPlaylistContentsItemViewHolder(binding: VideoPlaylistContentsItemBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    class VideoPlaylistContentsItemViewHolder(binding: VideoPlaylistContentsItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val backgroundView: View = binding.backgroundView
         val thumbnailView: ImageView = binding.thumbnailView
         val titleView: TextView = binding.titleView

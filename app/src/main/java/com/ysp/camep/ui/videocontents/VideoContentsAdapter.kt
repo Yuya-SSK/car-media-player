@@ -10,12 +10,8 @@ import com.ssk.car.media.player.data.entity.VideoContent
 import com.ysp.camep.databinding.VideoContentsItemBinding
 import com.ysp.camep.ui.videocontents.VideoContentsAdapter.VideoContentsItemViewHolder
 
-class VideoContentsAdapter(private val listener: ItemClickListener) :
+class VideoContentsAdapter(private val listener: (videoContent: VideoContent) -> Unit) :
     RecyclerView.Adapter<VideoContentsItemViewHolder>() {
-    interface ItemClickListener {
-        fun onItemClick(videoContent: VideoContent)
-    }
-
     private var items: List<VideoContent> = listOf()
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,13 +19,15 @@ class VideoContentsAdapter(private val listener: ItemClickListener) :
     ): VideoContentsItemViewHolder {
         return VideoContentsItemViewHolder(
             VideoContentsItemBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false)
+                LayoutInflater.from(parent.context), parent, false
+            )
         )
     }
 
     override fun onBindViewHolder(
-        holder: VideoContentsItemViewHolder, position: Int) {
-        holder.backgroundView.setOnClickListener { listener.onItemClick(items[position]) }
+        holder: VideoContentsItemViewHolder, position: Int
+    ) {
+        holder.backgroundView.setOnClickListener { listener(items[position]) }
         holder.thumbnailView.setImageBitmap(items[position].thumbnail)
         holder.titleView.text = items[position].title
     }
@@ -43,8 +41,8 @@ class VideoContentsAdapter(private val listener: ItemClickListener) :
         notifyDataSetChanged()
     }
 
-    class VideoContentsItemViewHolder(binding: VideoContentsItemBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    class VideoContentsItemViewHolder(binding: VideoContentsItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         val backgroundView: View = binding.backgroundView
         val thumbnailView: ImageView = binding.thumbnailView
         val titleView: TextView = binding.titleView

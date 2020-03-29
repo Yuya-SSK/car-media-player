@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ssk.car.media.player.data.entity.VideoContent
 import com.ssk.car.media.player.log.YLog
 import com.ysp.camep.databinding.VideoContentsFragmentBinding
 import com.ysp.camep.ui.video.VideoFragmentDirections
@@ -18,17 +17,22 @@ import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 
 @RuntimePermissions
-class VideoContentsFragment : Fragment(), VideoContentsAdapter.ItemClickListener {
+class VideoContentsFragment : Fragment() {
     private lateinit var binding: VideoContentsFragmentBinding
     private val viewModel: VideoContentsViewModel by viewModels()
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         YLog.methodIn()
         binding = VideoContentsFragmentBinding.inflate(inflater, container, false)
-        val adapter = VideoContentsAdapter(this)
+        val adapter = VideoContentsAdapter {
+            YLog.methodIn(it.toString())
+            findNavController().navigate(
+                    VideoFragmentDirections.actionVideoToVideoPlayer(
+                            listOf(it.uri).toTypedArray()))
+        }
         binding.videoContentsRecycler.adapter = adapter
         binding.videoContentsRecycler.layoutManager = LinearLayoutManager(activity)
         viewModel.videoContents().observe(viewLifecycleOwner) {
@@ -39,9 +43,9 @@ class VideoContentsFragment : Fragment(), VideoContentsAdapter.ItemClickListener
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray) {
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray) {
         YLog.methodIn()
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         onRequestPermissionsResult(requestCode, grantResults)
@@ -51,12 +55,5 @@ class VideoContentsFragment : Fragment(), VideoContentsAdapter.ItemClickListener
     fun loadVideoContents() {
         YLog.methodIn()
         viewModel.loadVideoContents()
-    }
-
-    override fun onItemClick(videoContent: VideoContent) {
-        YLog.methodIn(videoContent.toString())
-        findNavController().navigate(
-            VideoFragmentDirections.actionVideoToVideoPlayer(
-                listOf(videoContent.uri).toTypedArray()))
     }
 }

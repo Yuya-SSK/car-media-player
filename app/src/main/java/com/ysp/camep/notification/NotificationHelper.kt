@@ -68,6 +68,7 @@ object NotificationHelper {
             NotificationManagerCompat.IMPORTANCE_LOW,
             Color.BLUE,
             Notification.VISIBILITY_PUBLIC,
-            Group.App);
+            Group.App
+        );
     }
 }

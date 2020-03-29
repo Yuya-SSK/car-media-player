@@ -13,16 +13,17 @@ import com.ysp.camep.databinding.MainActivityBinding
 class MainActivity : AppCompatActivity(R.layout.main_activity) {
 
     private val binding: MainActivityBinding by lazy {
-        MainActivityBinding.bind(findViewById<ViewGroup>(android.R.id.content)[0]) }
+        MainActivityBinding.bind(findViewById<ViewGroup>(android.R.id.content)[0])
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val navController = findNavController(R.id.main_nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.video_fragment,
-            R.id.home_fragment,
-            R.id.dashboard_fragment,
-            R.id.notifications_fragment)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.videoFragment,
+                R.id.audioFragment
+            )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)

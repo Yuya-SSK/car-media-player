@@ -2,36 +2,58 @@ package com.ssk.car.media.player.data.repository
 
 import com.ssk.car.media.player.data.dao.PlaylistDao
 import com.ssk.car.media.player.data.entity.Playlist
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class PlaylistRepositoryImpl(
-        private val playlistDao: PlaylistDao): PlaylistRepository {
+    private val playlistDao: PlaylistDao
+) : PlaylistRepository {
 
     companion object {
         @Volatile
         private var instance: PlaylistRepositoryImpl? = null
+
         @JvmStatic
         fun getInstance(playlistDao: PlaylistDao) = instance ?: synchronized(this) {
             instance ?: PlaylistRepositoryImpl(playlistDao).also { instance = it }
         }
     }
 
+    private val defaultDispatcher = Dispatchers.IO
+
     override suspend fun playlists(): List<Playlist> {
-        return playlistDao.playlists()
+        return withContext(defaultDispatcher) {
+            playlistDao.playlists()
+        }
+    }
+
+    override suspend fun playlist(id: Long): Playlist {
+        return withContext(defaultDispatcher) {
+            playlistDao.playlistById(id)
+        }
     }
 
     override suspend fun insert(vararg playlist: Playlist) {
-        playlistDao.insert(*playlist)
+        withContext(defaultDispatcher) {
+            playlistDao.insert(*playlist)
+        }
     }
 
     override suspend fun delete(vararg playlist: Playlist) {
-        playlistDao.delete(*playlist)
+        withContext(defaultDispatcher) {
+            playlistDao.delete(*playlist)
+        }
     }
 
     override suspend fun update(vararg playlist: Playlist) {
-        playlistDao.update(*playlist)
+        withContext(defaultDispatcher) {
+            playlistDao.update(*playlist)
+        }
     }
 
     override suspend fun deleteAll() {
-        playlistDao.deleteAll()
+        withContext(defaultDispatcher) {
+            playlistDao.deleteAll()
+        }
     }
 }

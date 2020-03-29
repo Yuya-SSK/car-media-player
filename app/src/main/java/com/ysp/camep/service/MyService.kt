@@ -8,7 +8,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleService
+import androidx.lifecycle.lifecycleScope
 import com.ssk.car.media.player.device.power.PowerManager
 import com.ssk.car.media.player.log.YLog
 import com.ysp.camep.Injection
@@ -37,15 +38,20 @@ class MyService : LifecycleService() {
         }
     }
 
-    private fun getMonitoringSupplyPowerNotification(context: Context) : Notification {
+    private fun getMonitoringSupplyPowerNotification(context: Context): Notification {
         val pendingIntent = TaskStackBuilder.create(context)
             .addNextIntent(Intent(context, MainActivity::class.java))
             .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)!!
         val stopAction = NotificationCompat.Action(
             R.mipmap.ic_launcher,
             getString(R.string.action_end),
-            getStopActionPendingIntent(this))
-        return NotificationHelper.getMonitoringSupplyPowerNotification(this, pendingIntent, stopAction)
+            getStopActionPendingIntent(this)
+        )
+        return NotificationHelper.getMonitoringSupplyPowerNotification(
+            this,
+            pendingIntent,
+            stopAction
+        )
     }
 
     private fun getStopActionPendingIntent(context: Context): PendingIntent {
@@ -53,7 +59,8 @@ class MyService : LifecycleService() {
             context,
             0,
             Intent(context, StopServiceBroadcastReceiver::class.java),
-            PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
     }
 
     private class StopServiceBroadcastReceiver : BroadcastReceiver() {

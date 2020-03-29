@@ -8,6 +8,9 @@ interface PlaylistDao {
     @Query("SELECT * from playlist_table ORDER BY id ASC")
     fun playlists(): List<Playlist>
 
+    @Query("SELECT * from playlist_table WHERE name = :id")
+    fun playlistById(id: Long): Playlist
+
     @Query("SELECT * from playlist_table WHERE name = :name")
     fun playlistByName(name: String): Playlist
 

@@ -43,6 +43,15 @@ class PlaylistRepositoryImplTest {
     }
 
     @Test
+    fun playlistById() = runBlocking {
+        repository.insert(Playlist(name = DATA_NAME1))
+        repository.insert(Playlist(name = DATA_NAME2))
+        repository.insert(Playlist(name = DATA_NAME3))
+        assertThat(repository.playlist(1L)).isNotNull()
+        return@runBlocking
+    }
+
+    @Test
     fun insert1() = runBlocking {
         repository.insert(Playlist(name = DATA_NAME1))
         repository.insert(Playlist(name = DATA_NAME2))

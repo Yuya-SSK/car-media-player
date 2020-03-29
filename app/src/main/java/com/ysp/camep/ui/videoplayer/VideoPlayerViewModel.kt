@@ -25,11 +25,13 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 class VideoPlayerViewModel(application: Application) : AndroidViewModel(application) {
-    private val playbackRepository: PlaybackRepository = Injection.providePlaybackRepository(application)
+    private val playbackRepository: PlaybackRepository =
+        Injection.providePlaybackRepository(application)
     private val player = ExoPlayerFactory.newSimpleInstance(application, DefaultTrackSelector())
     private val dataSourceFactory: DataSource.Factory
     private val extractorMediaSourceFactory: ExtractorMediaSource.Factory
     private lateinit var playbackWithContents: PlaybackWithContents
+
     init {
         YLog.methodIn()
         player.addListener(EventListener())
@@ -37,7 +39,8 @@ class VideoPlayerViewModel(application: Application) : AndroidViewModel(applicat
         dataSourceFactory = DefaultDataSourceFactory(
             application,
             Util.getUserAgent(application, application.getString(R.string.app_name)),
-            null)
+            null
+        )
         extractorMediaSourceFactory = ExtractorMediaSource.Factory(dataSourceFactory)
     }
 
@@ -66,7 +69,8 @@ class VideoPlayerViewModel(application: Application) : AndroidViewModel(applicat
             play(
                 ConcatenatingMediaSource(*playbackContentsToMediaSources(playbackWithContents.contents).toTypedArray()),
                 playbackWithContents.playback.windowIndex,
-                playbackWithContents.playback.position)
+                playbackWithContents.playback.position
+            )
         }
     }
 

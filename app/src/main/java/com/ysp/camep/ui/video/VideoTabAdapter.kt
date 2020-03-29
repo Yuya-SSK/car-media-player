@@ -9,10 +9,12 @@ import com.ysp.camep.R
 import com.ysp.camep.ui.videocontents.VideoContentsFragment
 import com.ysp.camep.ui.videoplaylist.VideoPlaylistFragment
 
-class VideoTabAdapter(fm: FragmentManager, context: Context)
-    : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class VideoTabAdapter(fm: FragmentManager, context: Context) :
+    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     private data class Page(val fragment: Fragment, val title: String)
+
     private val pages: List<Page>
+
     init {
         YLog.methodIn()
         pages = listOf(
@@ -22,17 +24,14 @@ class VideoTabAdapter(fm: FragmentManager, context: Context)
     }
 
     override fun getItem(position: Int): Fragment {
-        YLog.methodIn("position : $position")
         return pages[position].fragment
     }
 
     override fun getPageTitle(position: Int): CharSequence {
-        YLog.methodIn("position : $position")
         return pages[position].title
     }
 
     override fun getCount(): Int {
-        YLog.methodIn("ret : ${pages.size}")
         return pages.size
     }
 }

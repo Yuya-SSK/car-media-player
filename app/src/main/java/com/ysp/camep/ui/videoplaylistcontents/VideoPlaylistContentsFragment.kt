@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ssk.car.media.player.data.entity.VideoContent
 import com.ssk.car.media.player.log.YLog
 import com.ysp.camep.databinding.VideoPlaylistContentsFragmentBinding
 
-class VideoPlaylistContentsFragment : Fragment(), VideoPlaylistContentsAdapter.ItemClickListener {
+class VideoPlaylistContentsFragment : Fragment() {
     private val args: VideoPlaylistContentsFragmentArgs by navArgs()
     private lateinit var binding: VideoPlaylistContentsFragmentBinding
     private val viewModel: VideoPlaylistContentsViewModel by viewModels()
@@ -23,19 +23,16 @@ class VideoPlaylistContentsFragment : Fragment(), VideoPlaylistContentsAdapter.I
     ): View? {
         YLog.methodIn()
         binding = VideoPlaylistContentsFragmentBinding.inflate(inflater, container, false)
-        val adapter = VideoPlaylistContentsAdapter(this)
+        val adapter = VideoPlaylistContentsAdapter {
+            findNavController().navigate(
+                VideoPlaylistContentsFragmentDirections.actionVideoPlaylistContentsToVideoPlayer(
+                    listOf(it.uri).toTypedArray()
+                )
+            )
+        }
         binding.videoPlaylistContentsRecycler.adapter = adapter
         binding.videoPlaylistContentsRecycler.layoutManager = LinearLayoutManager(activity)
-//        viewModel.videoPlaylist().observe(viewLifecycleOwner) {
-//            adapter.setItems(it)
-//        }
+        viewModel.loadPlaylistContents(args.playlistId)
         return binding.root
-    }
-
-    override fun onItemClick(videoContent: VideoContent) {
-        YLog.methodIn(videoContent.toString())
-//        findNavController().navigate(
-//            VideoFragmentDirections.actionVideoToVideoPlayer(
-//                listOf(playlist.uris).toTypedArray()))
     }
 }
