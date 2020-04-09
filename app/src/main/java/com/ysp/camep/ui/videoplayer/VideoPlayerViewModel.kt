@@ -58,7 +58,7 @@ class VideoPlayerViewModel(application: Application) : AndroidViewModel(applicat
         YLog.methodIn()
         viewModelScope.launch {
             playbackRepository.updatePlayback(Playback())
-            playbackRepository.insertPlaybackContents(*uris.toTypedArray())
+            playbackRepository.insertContents(*uris.toTypedArray())
         }
     }
 

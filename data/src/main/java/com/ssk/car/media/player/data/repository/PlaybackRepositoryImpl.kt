@@ -5,7 +5,6 @@ import com.ssk.car.media.player.data.dao.PlaybackDao
 import com.ssk.car.media.player.data.entity.Playback
 import com.ssk.car.media.player.data.entity.PlaybackContent
 import com.ssk.car.media.player.data.entity.PlaybackWithContents
-import com.ssk.car.media.player.log.YLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -33,18 +32,18 @@ class PlaybackRepositoryImpl(
         }
     }
 
-    override suspend fun insertPlaybackContents(vararg uris: Uri) {
+    override suspend fun insertContents(vararg uris: Uri) {
         val playbackContents = mutableListOf<PlaybackContent>()
         for (uri in uris) {
             playbackContents.add(PlaybackContent(uri = uri))
         }
-        insertPlaybackContents(*playbackContents.toTypedArray())
+        insertContents(*playbackContents.toTypedArray())
     }
 
-    override suspend fun insertPlaybackContents(vararg playbackContents: PlaybackContent) {
+    override suspend fun insertContents(vararg contents: PlaybackContent) {
         validate()
         withContext(defaultDispatcher) {
-            playbackDao.insertPlaybackContents(*playbackContents)
+            playbackDao.insertContents(*contents)
         }
     }
 
@@ -54,10 +53,10 @@ class PlaybackRepositoryImpl(
         }
     }
 
-    override suspend fun updatePlaybackContents(vararg playbackContents: PlaybackContent) {
+    override suspend fun updateContents(vararg contents: PlaybackContent) {
         validate()
         withContext(defaultDispatcher) {
-            playbackDao.updatePlaybackContents(*playbackContents)
+            playbackDao.updateContents(*contents)
         }
     }
 

@@ -8,13 +8,13 @@ import com.ssk.car.media.player.data.entity.PlaybackWithContents
 interface PlaybackRepository {
     suspend fun playbackWithContents(): PlaybackWithContents
 
-    suspend fun insertPlaybackContents(vararg uris: Uri)
+    suspend fun insertContents(vararg uris: Uri)
 
-    suspend fun insertPlaybackContents(vararg playbackContents: PlaybackContent)
+    suspend fun insertContents(vararg contents: PlaybackContent)
 
     suspend fun updatePlayback(playback: Playback)
 
-    suspend fun updatePlaybackContents(vararg playbackContents: PlaybackContent)
+    suspend fun updateContents(vararg contents: PlaybackContent)
 
     suspend fun deleteAll()
 }

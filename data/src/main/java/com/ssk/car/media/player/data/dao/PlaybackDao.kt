@@ -15,13 +15,13 @@ interface PlaybackDao {
     fun insertPlayback(playback: Playback)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlaybackContents(vararg playbackContents: PlaybackContent)
+    fun insertContents(vararg contents: PlaybackContent)
 
     @Update
     fun updatePlayback(playback: Playback)
 
     @Update
-    fun updatePlaybackContents(vararg playbackContents: PlaybackContent)
+    fun updateContents(vararg contents: PlaybackContent)
 
     @Delete
     fun deletePlayback(playback: Playback)

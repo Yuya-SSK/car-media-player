@@ -55,21 +55,21 @@ class PlaybackRepositoryImplTest {
     @Test
     fun insertPlaybackContents() = runBlocking {
 
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY))
+        repository.insertContents(PlaybackContent(uri = URI_DUMMY))
         assertThat(repository.playbackWithContents().contents).hasSize(1)
-        repository.insertPlaybackContents(PlaybackContent(uri = URI_DUMMY), PlaybackContent(uri = URI_DUMMY))
+        repository.insertContents(PlaybackContent(uri = URI_DUMMY), PlaybackContent(uri = URI_DUMMY))
         assertThat(repository.playbackWithContents().contents).hasSize(3)
 
-        repository.insertPlaybackContents(URI_DUMMY)
+        repository.insertContents(URI_DUMMY)
         assertThat(repository.playbackWithContents().contents).hasSize(4)
-        repository.insertPlaybackContents(URI_DUMMY, URI_DUMMY)
+        repository.insertContents(URI_DUMMY, URI_DUMMY)
         assertThat(repository.playbackWithContents().contents).hasSize(6)
 
         repository.deleteAll()
 
-        repository.insertPlaybackContents(URI_DUMMY)
+        repository.insertContents(URI_DUMMY)
         assertThat(repository.playbackWithContents().contents).hasSize(1)
-        repository.insertPlaybackContents(URI_DUMMY, URI_DUMMY)
+        repository.insertContents(URI_DUMMY, URI_DUMMY)
         assertThat(repository.playbackWithContents().contents).hasSize(3)
 
         return@runBlocking
@@ -99,18 +99,18 @@ class PlaybackRepositoryImplTest {
 
     @Test
     fun updatePlaybackContents() = runBlocking {
-        repository.insertPlaybackContents(URI_DUMMY)
-        repository.insertPlaybackContents(URI_DUMMY)
+        repository.insertContents(URI_DUMMY)
+        repository.insertContents(URI_DUMMY)
 
         val playbackContent0 = repository.playbackWithContents().contents[0]
         playbackContent0.isPlayed = true
-        repository.updatePlaybackContents(playbackContent0)
+        repository.updateContents(playbackContent0)
         assertThat(repository.playbackWithContents().contents[0].isPlayed).isTrue()
         assertThat(repository.playbackWithContents().contents[1].isPlayed).isFalse()
 
         val playbackContent1 = repository.playbackWithContents().contents[1]
         playbackContent1.isPlayed = true
-        repository.updatePlaybackContents(playbackContent1)
+        repository.updateContents(playbackContent1)
         assertThat(repository.playbackWithContents().contents[0].isPlayed).isTrue()
         assertThat(repository.playbackWithContents().contents[1].isPlayed).isTrue()
 
