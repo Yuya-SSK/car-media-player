@@ -5,8 +5,10 @@ import com.ssk.car.media.player.data.dao.PlaybackDao
 import com.ssk.car.media.player.data.entity.Playback
 import com.ssk.car.media.player.data.entity.PlaybackContent
 import com.ssk.car.media.player.data.entity.PlaybackWithContents
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.ssk.car.media.player.log.YLog
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 
 class PlaybackRepositoryImpl(
     private val playbackDao: PlaybackDao
@@ -23,12 +25,27 @@ class PlaybackRepositoryImpl(
             }
     }
 
+    init {
+        playbackDao.init()
+    }
+
     private val defaultDispatcher = Dispatchers.IO
 
-    override suspend fun playbackWithContents(): PlaybackWithContents {
-        validate()
+    override suspend fun playbackFlow() =
+        playbackDao.playbackFlow()
+
+    override suspend fun playbackWithContentsFlow() =
+        playbackDao.playbackWithContentFlow()
+
+    override suspend fun playback(): Playback {
         return withContext(defaultDispatcher) {
-            playbackDao.playbackWithContents().first()
+            playbackDao.playback()
+        }
+    }
+
+    override suspend fun playbackWithContents(): PlaybackWithContents {
+        return withContext(defaultDispatcher) {
+            playbackDao.playbackWithContents()
         }
     }
 
@@ -41,7 +58,6 @@ class PlaybackRepositoryImpl(
     }
 
     override suspend fun insertContents(vararg contents: PlaybackContent) {
-        validate()
         withContext(defaultDispatcher) {
             playbackDao.insertContents(*contents)
         }
@@ -49,26 +65,19 @@ class PlaybackRepositoryImpl(
 
     override suspend fun updatePlayback(playback: Playback) {
         withContext(defaultDispatcher) {
-            playbackDao.insertPlayback(playback.copy(id = 1L))
+            playbackDao.updatePlayback(playback.copy(id = 1L))
         }
     }
 
     override suspend fun updateContents(vararg contents: PlaybackContent) {
-        validate()
         withContext(defaultDispatcher) {
             playbackDao.updateContents(*contents)
         }
     }
 
-    override suspend fun deleteAll() =
+    override suspend fun deleteContents(vararg contents: PlaybackContent) {
         withContext(defaultDispatcher) {
-            playbackDao.deleteAll()
+            playbackDao.deleteContents(*contents)
         }
-
-    private suspend fun validate() =
-        withContext(defaultDispatcher) {
-            if (playbackDao.playbackWithContents().isEmpty()) {
-                playbackDao.insertPlayback(Playback(id = 1L))
-            }
     }
 }

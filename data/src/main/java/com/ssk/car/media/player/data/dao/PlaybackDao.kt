@@ -4,15 +4,31 @@ import androidx.room.*
 import com.ssk.car.media.player.data.entity.Playback
 import com.ssk.car.media.player.data.entity.PlaybackContent
 import com.ssk.car.media.player.data.entity.PlaybackWithContents
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlaybackDao {
+
+    @Query("SELECT * FROM playback_table where playback_id = 1")
+    fun playbackFlow(): Flow<Playback>
+
+    @Transaction
+    @Query("SELECT * FROM playback_table where playback_id = 1")
+    fun playbackWithContentFlow(): Flow<PlaybackWithContents>
+
+    @Query("INSERT INTO playback_table VALUES (1, 0, 0)")
+    fun init()
+
+    @Query("SELECT * FROM playback_table where playback_id = 1")
+    fun playback(): Playback
+
+    @Transaction
+    @Query("SELECT * FROM playback_table where playback_id = 1")
+    fun playbackWithContents(): PlaybackWithContents
+
     @Transaction
     @Query("SELECT * FROM playback_table")
-    fun playbackWithContents(): List<PlaybackWithContents>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlayback(playback: Playback)
+    fun playbackWithContentsList(): List<PlaybackWithContents>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertContents(vararg contents: PlaybackContent)
@@ -24,7 +40,7 @@ interface PlaybackDao {
     fun updateContents(vararg contents: PlaybackContent)
 
     @Delete
-    fun deletePlayback(playback: Playback)
+    fun deleteContents(vararg contents: PlaybackContent)
 
     @Query("DELETE FROM playback_table")
     fun deleteAll()
