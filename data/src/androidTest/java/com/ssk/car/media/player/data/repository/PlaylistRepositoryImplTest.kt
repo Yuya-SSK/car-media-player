@@ -48,24 +48,6 @@ class PlaylistRepositoryImplTest {
     }
 
     @Test
-    fun playlistById() = runBlocking {
-        repository.insert(Playlist(name = DATA_NAME1))
-        repository.insert(Playlist(name = DATA_NAME2))
-        repository.insert(Playlist(name = DATA_NAME3))
-        assertThat(repository.playlistById(1L)).isNotNull()
-        return@runBlocking
-    }
-
-    @Test
-    fun playlists() = runBlocking {
-        repository.insert(Playlist(name = DATA_NAME1))
-        repository.insert(Playlist(name = DATA_NAME2))
-        repository.insert(Playlist(name = DATA_NAME3))
-        assertThat(repository.playlists()).hasSize(3)
-        return@runBlocking
-    }
-
-    @Test
     fun playlistsFlow() = runBlocking {
         var count = 0
         val job = launch {
@@ -101,6 +83,24 @@ class PlaylistRepositoryImplTest {
         repository.update(Playlist(1L, DATA_NAME1_MOD, "説明"))
         delay(100)
         job.cancelAndJoin()
+        return@runBlocking
+    }
+
+    @Test
+    fun playlistById() = runBlocking {
+        repository.insert(Playlist(name = DATA_NAME1))
+        repository.insert(Playlist(name = DATA_NAME2))
+        repository.insert(Playlist(name = DATA_NAME3))
+        assertThat(repository.playlistById(1L)).isNotNull()
+        return@runBlocking
+    }
+
+    @Test
+    fun playlists() = runBlocking {
+        repository.insert(Playlist(name = DATA_NAME1))
+        repository.insert(Playlist(name = DATA_NAME2))
+        repository.insert(Playlist(name = DATA_NAME3))
+        assertThat(repository.playlists()).hasSize(3)
         return@runBlocking
     }
 

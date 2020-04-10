@@ -35,11 +35,11 @@ class VideoPlaylistFragment : Fragment() {
         binding.addButton.setOnClickListener {
             YLog.methodIn()
             findNavController().navigate(
-                VideoFragmentDirections.actionVideoToPlaylistNameEditDialog()
+                VideoFragmentDirections.actionVideoToPlaylistNameEditDialog(null)
             )
         }
 
-        viewModel.videoPlaylist().observe(viewLifecycleOwner) {
+        viewModel.videoPlaylist.observe(viewLifecycleOwner) {
             YLog.methodIn(it.toString())
             adapter.setItems(it)
         }

@@ -23,13 +23,18 @@
     <dialog
         android:id="@+id/playlistNameEditDialogFragment"
         android:name="com.ysp.camep.dialog.PlaylistNameEditDialogFragment"
-        android:label="PlaylistNameEditDialogFragment" />
+        android:label="PlaylistNameEditDialogFragment" >
+        <argument
+            android:name="playlist"
+            app:argType="com.ssk.car.media.player.data.entity.Playlist"
+            app:nullable="true" />
+    </dialog>
     <fragment
         android:id="@+id/videoPlaylistContentsFragment"
         android:name="com.ysp.camep.ui.videoplaylistcontents.VideoPlaylistContentsFragment"
         android:label="VideoPlaylistContents" >
         <argument
-            android:name="playlist_id"
+            android:name="playlistId"
             app:argType="long" />
         <action
             android:id="@+id/action_videoPlaylistContents_to_videoPlayer"

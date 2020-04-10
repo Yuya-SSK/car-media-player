@@ -3,7 +3,6 @@ package com.ssk.car.media.player.data.repository
 import com.ssk.car.media.player.data.dao.PlaylistDao
 import com.ssk.car.media.player.data.entity.Playlist
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class PlaylistRepositoryImpl(
@@ -22,6 +21,8 @@ class PlaylistRepositoryImpl(
 
     private val defaultDispatcher = Dispatchers.IO
 
+    override fun playlistsFlow() = playlistDao.playlistsFlow()
+
     override suspend fun playlistById(id: Long): Playlist {
         return withContext(defaultDispatcher) {
             playlistDao.playlistById(id)
@@ -33,9 +34,6 @@ class PlaylistRepositoryImpl(
             playlistDao.playlists()
         }
     }
-
-    override suspend fun playlistsFlow() =
-        playlistDao.playlistsFlow()
 
     override suspend fun insert(vararg playlist: Playlist) {
         withContext(defaultDispatcher) {

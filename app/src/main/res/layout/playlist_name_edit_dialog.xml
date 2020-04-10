@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="text" type="String" />
+        <variable name="playlistName" type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:autofillHints="プレイリストのタイトルを入力"
-            android:text="@={text}"
+            android:autofillHints="プレイリストの名前を入力"
+            android:text="@={playlistName}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

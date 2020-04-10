@@ -8,13 +8,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlaybackRepository {
 
+    fun playbackFlow(): Flow<Playback>
+
+    fun playbackWithContentsFlow(): Flow<PlaybackWithContents>
+
     suspend fun playback(): Playback
 
-    suspend fun playbackFlow(): Flow<Playback>
-
     suspend fun playbackWithContents(): PlaybackWithContents
-
-    suspend fun playbackWithContentsFlow(): Flow<PlaybackWithContents>
 
     suspend fun insertContents(vararg uris: Uri)
 

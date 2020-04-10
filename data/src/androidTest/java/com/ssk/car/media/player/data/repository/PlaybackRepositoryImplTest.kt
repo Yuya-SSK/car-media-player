@@ -39,14 +39,6 @@ class PlaybackRepositoryImplTest {
     }
 
     @Test
-    fun playback() = runBlocking {
-        assertThat(repository.playback().id).isEqualTo(1L)
-        assertThat(repository.playback().windowIndex).isEqualTo(0)
-        assertThat(repository.playback().position).isEqualTo(0L)
-        return@runBlocking
-    }
-
-    @Test
     fun playbackFlow() = runBlocking {
         var count = 0
         val job = launch {
@@ -70,15 +62,6 @@ class PlaybackRepositoryImplTest {
         repository.updatePlayback(playback)
         delay(100)
         job.cancelAndJoin()
-        return@runBlocking
-    }
-
-    @Test
-    fun playbackWithContents() = runBlocking {
-        assertThat(repository.playbackWithContents().playback.id).isEqualTo(1L)
-        assertThat(repository.playbackWithContents().playback.windowIndex).isEqualTo(0)
-        assertThat(repository.playbackWithContents().playback.position).isEqualTo(0L)
-        assertThat(repository.playbackWithContents().contents).isEmpty()
         return@runBlocking
     }
 
@@ -116,6 +99,23 @@ class PlaybackRepositoryImplTest {
         repository.insertContents(URI_DUMMY, URI_DUMMY)
         delay(100)
         job.cancelAndJoin()
+        return@runBlocking
+    }
+
+    @Test
+    fun playback() = runBlocking {
+        assertThat(repository.playback().id).isEqualTo(1L)
+        assertThat(repository.playback().windowIndex).isEqualTo(0)
+        assertThat(repository.playback().position).isEqualTo(0L)
+        return@runBlocking
+    }
+
+    @Test
+    fun playbackWithContents() = runBlocking {
+        assertThat(repository.playbackWithContents().playback.id).isEqualTo(1L)
+        assertThat(repository.playbackWithContents().playback.windowIndex).isEqualTo(0)
+        assertThat(repository.playbackWithContents().playback.position).isEqualTo(0L)
+        assertThat(repository.playbackWithContents().contents).isEmpty()
         return@runBlocking
     }
 
