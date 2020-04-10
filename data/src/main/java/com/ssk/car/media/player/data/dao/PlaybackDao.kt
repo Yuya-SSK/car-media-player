@@ -9,26 +9,22 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PlaybackDao {
 
-    @Query("SELECT * FROM playback_table where playback_id = 1")
-    fun playbackFlow(): Flow<Playback>
-
-    @Transaction
-    @Query("SELECT * FROM playback_table where playback_id = 1")
-    fun playbackWithContentFlow(): Flow<PlaybackWithContents>
-
     @Query("INSERT INTO playback_table VALUES (1, 0, 0)")
     fun init()
 
     @Query("SELECT * FROM playback_table where playback_id = 1")
     fun playback(): Playback
 
+    @Query("SELECT * FROM playback_table where playback_id = 1")
+    fun playbackFlow(): Flow<Playback>
+
     @Transaction
     @Query("SELECT * FROM playback_table where playback_id = 1")
     fun playbackWithContents(): PlaybackWithContents
 
     @Transaction
-    @Query("SELECT * FROM playback_table")
-    fun playbackWithContentsList(): List<PlaybackWithContents>
+    @Query("SELECT * FROM playback_table where playback_id = 1")
+    fun playbackWithContentFlow(): Flow<PlaybackWithContents>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertContents(vararg contents: PlaybackContent)
@@ -41,7 +37,4 @@ interface PlaybackDao {
 
     @Delete
     fun deleteContents(vararg contents: PlaybackContent)
-
-    @Query("DELETE FROM playback_table")
-    fun deleteAll()
 }

@@ -31,23 +31,23 @@ class PlaybackRepositoryImpl(
 
     private val defaultDispatcher = Dispatchers.IO
 
-    override suspend fun playbackFlow() =
-        playbackDao.playbackFlow()
-
-    override suspend fun playbackWithContentsFlow() =
-        playbackDao.playbackWithContentFlow()
-
     override suspend fun playback(): Playback {
         return withContext(defaultDispatcher) {
             playbackDao.playback()
         }
     }
 
+    override suspend fun playbackFlow() =
+        playbackDao.playbackFlow()
+
     override suspend fun playbackWithContents(): PlaybackWithContents {
         return withContext(defaultDispatcher) {
             playbackDao.playbackWithContents()
         }
     }
+
+    override suspend fun playbackWithContentsFlow() =
+        playbackDao.playbackWithContentFlow()
 
     override suspend fun insertContents(vararg uris: Uri) {
         val playbackContents = mutableListOf<PlaybackContent>()

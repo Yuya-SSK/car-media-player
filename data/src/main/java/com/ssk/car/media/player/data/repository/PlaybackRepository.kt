@@ -7,13 +7,14 @@ import com.ssk.car.media.player.data.entity.PlaybackWithContents
 import kotlinx.coroutines.flow.Flow
 
 interface PlaybackRepository {
-    suspend fun playbackFlow(): Flow<Playback>
-
-    suspend fun playbackWithContentsFlow(): Flow<PlaybackWithContents>
 
     suspend fun playback(): Playback
 
+    suspend fun playbackFlow(): Flow<Playback>
+
     suspend fun playbackWithContents(): PlaybackWithContents
+
+    suspend fun playbackWithContentsFlow(): Flow<PlaybackWithContents>
 
     suspend fun insertContents(vararg uris: Uri)
 
