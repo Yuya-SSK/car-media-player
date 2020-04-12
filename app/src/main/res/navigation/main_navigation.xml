@@ -22,7 +22,7 @@
     </fragment>
     <dialog
         android:id="@+id/playlistNameEditDialogFragment"
-        android:name="com.ysp.camep.dialog.PlaylistNameEditDialogFragment"
+        android:name="com.ysp.camep.ui.playlistnameedit.PlaylistNameEditDialogFragment"
         android:label="PlaylistNameEditDialogFragment" >
         <argument
             android:name="playlist"

@@ -1,4 +1,4 @@
-package com.ysp.camep.dialog
+package com.ysp.camep.ui.playlistnameedit
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -7,12 +7,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.ssk.car.media.player.log.YLog
 import com.ysp.camep.databinding.PlaylistNameEditDialogBinding
-import com.ysp.camep.ui.videoplaylist.VideoPlaylistViewModel
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 class PlaylistNameEditDialogFragment : DialogFragment() {
     private val args: PlaylistNameEditDialogFragmentArgs by navArgs()

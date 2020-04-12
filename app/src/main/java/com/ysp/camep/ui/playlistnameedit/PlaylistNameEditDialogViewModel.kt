@@ -1,4 +1,4 @@
-package com.ysp.camep.dialog
+package com.ysp.camep.ui.playlistnameedit
 
 import android.app.Application
 import androidx.lifecycle.*

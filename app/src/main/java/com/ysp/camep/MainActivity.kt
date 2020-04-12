@@ -28,4 +28,7 @@ class MainActivity : AppCompatActivity(R.layout.main_activity) {
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
     }
+
+    override fun onSupportNavigateUp()
+            = findNavController(R.id.main_nav_host_fragment).navigateUp()
 }
