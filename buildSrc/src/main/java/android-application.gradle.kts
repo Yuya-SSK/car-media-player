@@ -23,7 +23,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.fragment:fragment-ktx:1.2.2")
+    implementation("androidx.fragment:fragment-ktx:1.2.4")
     implementation("com.google.android.material:material:1.1.0")
 
     // Lifecycle

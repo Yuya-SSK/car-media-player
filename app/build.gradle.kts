@@ -19,10 +19,10 @@ dependencies {
     implementation(project(":device"))
 
     // Navigation
-    implementation("androidx.navigation:navigation-fragment:2.2.1")
-    implementation("androidx.navigation:navigation-ui:2.2.1")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.2.1")
-    implementation("androidx.navigation:navigation-ui-ktx:2.2.1")
+    implementation("androidx.navigation:navigation-fragment:2.2.2")
+    implementation("androidx.navigation:navigation-ui:2.2.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.2.2")
+    implementation("androidx.navigation:navigation-ui-ktx:2.2.2")
 
     // Runtime Permission Utility
     implementation("org.permissionsdispatcher:permissionsdispatcher:4.6.0")
