@@ -1,0 +1,5 @@
+rootProject.name="Camep"
+include ":app"
+include ":log"
+include ":data"
+include ":device"
