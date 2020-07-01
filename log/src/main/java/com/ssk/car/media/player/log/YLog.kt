@@ -3,7 +3,7 @@ package com.ssk.car.media.player.log
 import android.util.Log
 
 object YLog {
-    private const val tag = "CarMediaPlayer"
+    private const val TAG = "CarMediaPlayer"
     private const val LOG_PREFIX_METHOD_IN = "in"
     private const val LOG_PREFIX_METHOD_OUT = "out"
     private val LOG_ENABLED = BuildConfig.DEBUG
@@ -19,7 +19,7 @@ object YLog {
         if (!LOG_ENABLED) return
         if (LOG_LEVEL.ordinal > logLevel.ordinal) return
         val threadName = if (PRINT_THREAD_NAME) "[${Thread.currentThread().name}]" else ""
-        Log.println(logLevel.value, tag, "$threadName $message")
+        Log.println(logLevel.value, TAG, "$threadName $message")
     }
 
     private fun getLogLine(): String {

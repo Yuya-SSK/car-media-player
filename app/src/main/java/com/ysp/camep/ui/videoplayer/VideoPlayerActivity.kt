@@ -31,6 +31,7 @@ class VideoPlayerActivity : AppCompatActivity(R.layout.video_player_activity) {
         if (Build.VERSION_CODES.O_MR1 <= Build.VERSION.SDK_INT) {
             setShowWhenLocked(true)
         } else {
+            @Suppress("DEPRECATION")
             window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
         }
 

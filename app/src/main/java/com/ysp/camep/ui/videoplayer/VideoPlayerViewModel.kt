@@ -65,7 +65,7 @@ class VideoPlayerViewModel(application: Application) : AndroidViewModel(applicat
     fun play() {
         YLog.methodIn()
         viewModelScope.launch {
-            playbackWithContents = playbackRepository.playbackWithContents()!!
+            playbackWithContents = playbackRepository.playbackWithContents()
             play(
                 ConcatenatingMediaSource(*playbackContentsToMediaSources(playbackWithContents.contents).toTypedArray()),
                 playbackWithContents.playback.windowIndex,
